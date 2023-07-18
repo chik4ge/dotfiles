@@ -1,0 +1,20 @@
+[user]
+	name = chikage
+	email = 35529908+chik4ge@users.noreply.github.com
+[push]
+	default = current
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
+[status]
+	showUntrackedFiles = all
+[core]
+	autocrlf = input
+	ignorecase = false
+	quotepath = false
+[color]
+	ui = true
+	diff = auto
+	status = auto
+	branch = auto
