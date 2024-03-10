@@ -18,3 +18,13 @@
 	diff = auto
 	status = auto
 	branch = auto
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[maintenance]
+	repo = /home/chikage/dev/Hupass
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

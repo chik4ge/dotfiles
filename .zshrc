@@ -36,3 +36,7 @@ alias ll='ls -AlF'
 alias la='ls -AF'
 alias lt='ls --tree'
 alias clip='xsel --clipboard --input'
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
