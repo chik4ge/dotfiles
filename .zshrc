@@ -28,10 +28,14 @@ zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-autosuggestions
 
 # rye
-source "$HOME/.rye/env"
+#source "$HOME/.rye/env"
+
+# ls color settings
+eval `dircolors -b ~/.colorrc`
 
 # aliases
-alias ls='lsd'
+#alias ls='lsd'
+alias ls='ls -hv --time-style="+%Y-%m-%d %H:%M:%S" --color=auto --group-directories-first'
 alias ll='ls -AlF'
 alias la='ls -AF'
 alias lt='ls --tree'
