@@ -1,21 +1,21 @@
 packages:
-  taps: 
-    - name: 'sdkman/tap'
+  taps:
+    - name: "sdkman/tap"
   brews:
     common:
-      - 'sheldon'
-      - 'lazygit'
-      - 'lazydocker'
-      - 'nvm'
-      - 'plenv'
-      - 'fzf'
-      - 'bat'
-      - 'tree'
-      - 'sdkman-cli'
-    darwin: 
-      - 'coreutils'
+      - "sheldon"
+      - "lazygit"
+      - "lazydocker"
+      - "nvm"
+      - "plenv"
+      - "fzf"
+      - "bat"
+      - "tree"
+      - "sdkman-cli"
+    darwin:
+      - "coreutils"
     linux: []
-  casks: 
+  casks:
     common: []
     darwin: []
     linux: []
