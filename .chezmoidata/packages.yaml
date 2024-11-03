@@ -10,7 +10,8 @@ packages:
       - 'fzf'
       - 'bat'
       - 'tree'
-    darwin: []
+    darwin: 
+      - 'coreutils'
     linux: []
   casks: 
     common: []
