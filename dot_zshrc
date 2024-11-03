@@ -44,3 +44,5 @@ alias clip='xsel --clipboard --input'
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

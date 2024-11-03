@@ -1,0 +1,6 @@
+LICENSE
+README.md
+
+{{ if ne .chezmoi.os "darwin" -}}
+dot_config/iterm
+{{- end }}
