@@ -1,5 +1,6 @@
 packages:
-  taps: []
+  taps: 
+    - 'sdkman/tap'
   brews:
     common:
       - 'sheldon'
@@ -10,6 +11,7 @@ packages:
       - 'fzf'
       - 'bat'
       - 'tree'
+      - 'sdkman-cli'
     darwin: 
       - 'coreutils'
     linux: []
