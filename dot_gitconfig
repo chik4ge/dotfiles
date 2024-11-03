@@ -3,6 +3,7 @@
     email = 35529908+chik4ge@users.noreply.github.com
 
 [push]
+    autoSetupRemote = true
     default = current
 
 [pull]
