@@ -8,6 +8,8 @@ packages:
       - 'nvm'
       - 'plenv'
       - 'fzf'
+      - 'bat'
+      - 'tree'
     darwin: []
     linux: []
   casks: 

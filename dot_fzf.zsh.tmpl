@@ -1,0 +1,11 @@
+# Setup fzf
+# ---------
+
+{{ if eq .chezmoi.os "darwin" -}}
+{{ else if eq .chezmoi.os "linux" -}}
+if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
+fi
+{{ end -}}
+
+source <(fzf --zsh)
