@@ -12,4 +12,5 @@ sheldon init --shell zsh -y
 brew install lazygit
 brew install lazydocker
 
-
+brew install nvm
+brew install plenv
