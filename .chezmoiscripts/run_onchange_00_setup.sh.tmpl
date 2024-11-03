@@ -1,4 +1,6 @@
 #! /bin/bash
+set -eu
+cd $(dirname $0)/..
 
 function install() {
     local cmd=$1
@@ -18,3 +20,10 @@ function install() {
         fi
     fi
 }
+
+install brew /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+{{ if eq .chezmoi.os "linux" -}}
+install zsh sudo apt install zsh -y
+chsh -s $(which zsh)
+{{ end -}}

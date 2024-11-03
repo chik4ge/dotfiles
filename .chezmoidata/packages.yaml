@@ -1,0 +1,14 @@
+packages:
+  brews:
+    common:
+      - 'sheldon'
+      - 'lazygit'
+      - 'lazydocker'
+      - 'nvm'
+      - 'plenv'
+    darwin: []
+    linux: []
+  casks: 
+    common: []
+    darwin: []
+    linux: []
