@@ -14,10 +14,15 @@ alias la='ls -AF'
 
 alias cz='chezmoi'
 
+alias lzg='lazygit'
+alias lzd='lazydocker'
+
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 eval "$(sheldon source)"
+
+if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="
