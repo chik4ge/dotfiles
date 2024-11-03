@@ -1,6 +1,6 @@
 packages:
   taps: 
-    - 'sdkman/tap'
+    - name: 'sdkman/tap'
   brews:
     common:
       - 'sheldon'
