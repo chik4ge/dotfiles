@@ -1,0 +1,26 @@
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# rye
+#source "$HOME/.rye/env"
+
+# ls
+eval `dircolors -b ~/.colorrc`
+
+{{ if eq .chezmoi.os "darwin" -}}
+alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
+{{ else if eq .chezmoi.os "linux" -}}
+alias ls='ls -hv --color --group-directories-first --time-style="+%Y-%m-%d %H:%M:%S" '
+{{ end -}}
+
+alias ll='ls -AlF'
+alias la='ls -AF'
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+eval "$(sheldon source)"
+
+{{ if eq .chezmoi.os "linux" -}}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end -}}

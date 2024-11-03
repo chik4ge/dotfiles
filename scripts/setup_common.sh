@@ -6,4 +6,10 @@ source scripts/check_installed.sh
 
 install brew /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-ln -sf 
+brew install sheldon
+sheldon init --shell zsh -y
+
+brew install lazygit
+brew install lazydocker
+
+
