@@ -2,6 +2,10 @@
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 
+{{ range .packages.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+
 {{ range .packages.brews.common -}}
 brew {{ . | quote }}
 {{ end -}}
@@ -9,7 +13,6 @@ brew {{ . | quote }}
 {{ range .packages.casks.common -}}
 cask {{ . | quote }}
 {{ end -}}
-EOF
 
 {{ if eq .chezmoi.os "linux" -}}
 {{ range .packages.brews.linux -}}
@@ -30,3 +33,5 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 {{ end -}}
+
+EOF
