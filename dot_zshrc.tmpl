@@ -20,6 +20,8 @@ alias lzd='lazydocker'
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
 eval "$(sheldon source)"
 
 if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
