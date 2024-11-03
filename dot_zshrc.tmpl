@@ -1,7 +1,6 @@
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 {{ if eq .chezmoi.os "darwin" -}}
 eval `gdircolors -b ~/.colorrc`
 alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
@@ -28,6 +27,11 @@ export GPG_TTY=$(tty)
 export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
 [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 
+if [ ! -d "$HOME/.nvm" ]; then mkdir -p $HOME/.nvm; fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
 eval "$(sheldon source)"
 
 if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
@@ -45,8 +49,4 @@ _fzf_comprun() {
   esac
 }
 
-{{ if eq .chezmoi.os "darwin" -}}
-eval "$(/opt/homebrew/bin/brew shellenv)"
-{{ else if eq .chezmoi.os "linux" -}}
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-{{ end -}}
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
