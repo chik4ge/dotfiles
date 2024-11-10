@@ -12,6 +12,8 @@ packages:
       - "bat"
       - "tree"
       - "sdkman-cli"
+      - "neovim"
+      - "s3cmd"
     darwin:
       - "coreutils"
     linux: []
