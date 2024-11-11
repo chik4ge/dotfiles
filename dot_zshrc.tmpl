@@ -2,6 +2,12 @@
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 {{ if eq .chezmoi.os "darwin" -}}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ else if eq .chezmoi.os "linux" -}}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end -}}
+
+{{ if eq .chezmoi.os "darwin" -}}
 eval `gdircolors -b ~/.colorrc`
 alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
 {{ else if eq .chezmoi.os "linux" -}}
@@ -48,9 +54,3 @@ _fzf_comprun() {
     *)            fzf --preview 'bat -n --color=always --style=header,grid {}' "$@" ;;
   esac
 }
-
-{{ if eq .chezmoi.os "darwin" -}}
-eval "$(/opt/homebrew/bin/brew shellenv)"
-{{ else if eq .chezmoi.os "linux" -}}
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-{{ end -}}
