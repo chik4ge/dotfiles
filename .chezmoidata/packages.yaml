@@ -14,6 +14,8 @@ packages:
       - "sdkman-cli"
       - "neovim"
       - "s3cmd"
+      - "luajit"
+      - "ripgrep"
     darwin:
       - "coreutils"
     linux: []
