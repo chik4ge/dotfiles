@@ -8,10 +8,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
-eval `gdircolors -b ~/.colorrc`
+eval $(gdircolors -b ~/.colorrc)
 alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
 {{ else if eq .chezmoi.os "linux" -}}
-eval `dircolors -b ~/.colorrc`
+eval $(dircolors -b ~/.colorrc)
 alias ls='ls -hv --color --group-directories-first --time-style="+%Y-%m-%d %H:%M:%S" '
 {{ end -}}
 
@@ -35,12 +35,16 @@ export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
 
 if [ ! -d "$HOME/.nvm" ]; then mkdir -p $HOME/.nvm; fi
 export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"                                       # This loads nvm
 [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 eval "$(sheldon source)"
 
-if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
+source <(kubectl completion zsh)
+
+if which plenv >/dev/null; then eval "$(plenv init - zsh)"; fi
+
+export PATH="/home/linuxbrew/.linuxbrew/opt/mysql-client/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 _fzf_comprun() {
@@ -48,9 +52,11 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'                       "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"                             "$@" ;;
-    ssh)          fzf --preview 'dig {}'                                       "$@" ;;
-    *)            fzf --preview 'bat -n --color=always --style=header,grid {}' "$@" ;;
+  cd) fzf --preview 'tree -C {} | head -200' "$@" ;;
+  export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
+  ssh) fzf --preview 'dig {}' "$@" ;;
+  *) fzf --preview 'bat -n --color=always --style=header,grid {}' "$@" ;;
   esac
 }
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
