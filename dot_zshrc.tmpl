@@ -41,6 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(sheldon source)"
 
 source <(kubectl completion zsh)
+source <(talosctl completion zsh)
 
 if which plenv >/dev/null; then eval "$(plenv init - zsh)"; fi
 
