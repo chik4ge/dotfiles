@@ -12,12 +12,12 @@ function install() {
         "$@"
 
         # check the exit code of the previous command
-        if [ $? -eq 0 ]; then
-            echo "$cmd is installed"
-        else
-            echo "installing $cmd failed"
-            exit 1
-        fi
+        # if [ $? -eq 0 ]; then
+        #     echo "$cmd is installed"
+        # else
+        #     echo "installing $cmd failed"
+        #     exit 1
+        # fi
     fi
 }
 
