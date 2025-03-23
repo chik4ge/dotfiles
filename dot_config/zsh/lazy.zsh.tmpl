@@ -1,0 +1,26 @@
+# ls color
+{{ if eq .chezmoi.os "darwin" -}}
+eval $(gdircolors -b ~/.config/zsh/colorrc)
+alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
+{{ else if eq .chezmoi.os "linux" -}}
+eval $(dircolors -b ~/.config/zsh/colorrc)
+alias ls='ls -hv --color --group-directories-first --time-style="+%Y-%m-%d %H:%M:%S" '
+{{ end -}}
+
+alias ll='ls -AlF'
+alias la='ls -AF'
+alias cz='chezmoi'
+alias lzg='lazygit'
+alias lzd='lazydocker'
+
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
+export GPG_TTY=$(tty)
+
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+if which plenv >/dev/null; then eval "$(plenv init - zsh)"; fi
+
+export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

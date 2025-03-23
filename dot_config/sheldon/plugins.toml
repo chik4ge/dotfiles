@@ -11,14 +11,37 @@
 # See the documentation for more https://github.com/rossmacarthur/sheldon#readme
 
 shell = "zsh"
+apply = ["defer"]
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 
 [plugins]
 
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+apply = ["source"]
+hooks.post = '''
+zsh-defer -t 0.001 autoload -Uz compinit
+zsh-defer -t 0.001 compinit
+'''
+
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
+apply = ["source"]
+hooks.post = "source ~/.config/zsh/p10k.zsh"
+
+[plugins.on-demand-completion]
+local = "~/.config/zsh/plugins/on-demand-completion"
+apply = ["source"]
+
+# lazy
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
-[plugins.zsh-completions]
-github = "marlonrichert/zsh-autocomplete"
+[plugins.docker-completion]
+inline = "on_demand_completion 'docker'"

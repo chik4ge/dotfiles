@@ -1,63 +1,42 @@
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# source command override
+function source {
+  ensure_zcompiled $1
+  builtin source $@
+}
+function ensure_zcompiled {
+  local compiled="$1.zwc"
+  if [[ ! -r "$compiled" || "$1" -nt "$compiled" ]]; then
+    echo "\033[1;36mCompiling\033[m $1"
+    zcompile $1
+  fi
+}
+ensure_zcompiled ~/.zshrc
 
+# init homebrew to run sheldon
 {{ if eq .chezmoi.os "darwin" -}}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 {{ else if eq .chezmoi.os "linux" -}}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end -}}
 
-{{ if eq .chezmoi.os "darwin" -}}
-eval $(gdircolors -b ~/.colorrc)
-alias ls='LC_COLLATE=C gls --group-directories-first --color -h --time-style="+%Y-%m-%d %H:%M:%S"'
-{{ else if eq .chezmoi.os "linux" -}}
-eval $(dircolors -b ~/.colorrc)
-alias ls='ls -hv --color --group-directories-first --time-style="+%Y-%m-%d %H:%M:%S" '
-{{ end -}}
+# load sheldon with cache
+cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+sheldon_cache="$cache_dir/sheldon.zsh"
+sheldon_toml="$HOME/.config/sheldon/plugins.toml"
+# if cache does not exist or outdated, create it
+if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  mkdir -p $cache_dir
+  sheldon source >$sheldon_cache
+fi
+source "$sheldon_cache"
+unset cache_dir sheldon_cache sheldon_toml
+# eval "$(sheldon source)"
 
-alias ll='ls -AlF'
-alias la='ls -AF'
+# load settings that require snyc
+source ~/.config/zsh/sync.zsh
 
-alias cz='chezmoi'
+# load settings that don't require snyc
+zsh-defer source ~/.config/zsh/lazy.zsh
 
-alias lzg='lazygit'
-alias lzd='lazydocker'
-
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
-
-export GPG_TTY=$(tty)
-
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-
-if [ ! -d "$HOME/.nvm" ]; then mkdir -p $HOME/.nvm; fi
-export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"                                       # This loads nvm
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-eval "$(sheldon source)"
-
-source <(kubectl completion zsh)
-source <(talosctl completion zsh)
-
-if which plenv >/dev/null; then eval "$(plenv init - zsh)"; fi
-
-export PATH="/home/linuxbrew/.linuxbrew/opt/mysql-client/bin:$PATH"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-  cd) fzf --preview 'tree -C {} | head -200' "$@" ;;
-  export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
-  ssh) fzf --preview 'dig {}' "$@" ;;
-  *) fzf --preview 'bat -n --color=always --style=header,grid {}' "$@" ;;
-  esac
-}
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# unbind source override
+zsh-defer unfunction source
