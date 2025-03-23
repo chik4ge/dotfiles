@@ -4,6 +4,7 @@ packages:
   brews:
     common:
       - "sheldon"
+      - "docker"
       - "lazygit"
       - "lazydocker"
       - "nvm"
