@@ -25,6 +25,7 @@ install brew /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebr
 
 {{ if eq .chezmoi.os "linux" -}}
 install docker sudo sh -c "$(curl -fsSL https://get.docker.com)"
+install gcc sudo apt install build-essential -y
 install zsh sudo apt install zsh -y
 chsh -s $(which zsh)
 {{ end -}}
