@@ -18,10 +18,6 @@ cask {{ . | quote }}
 {{ range .packages.brews.linux -}}
 brew {{ . | quote }}
 {{ end -}}
-
-{{ range .packages.casks.linux -}}
-cask {{ . | quote }}
-{{ end -}}
 {{ end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
