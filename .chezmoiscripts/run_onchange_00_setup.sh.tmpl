@@ -4,7 +4,7 @@ cd $(dirname $0)/..
 
 function install() {
     local cmd=$1
-    if command -v $cmd &> /dev/null; then
+    if command -v $cmd &>/dev/null; then
         echo "$cmd is already installed"
     else
         echo "Installing $1"
@@ -12,7 +12,7 @@ function install() {
         "$@"
 
         # check if cmd is installed
-        if command -v $cmd &> /dev/null; then
+        if command -v $cmd &>/dev/null; then
             echo "$cmd is installed"
         else
             echo "installing $cmd failed"
@@ -24,6 +24,7 @@ function install() {
 install brew /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 {{ if eq .chezmoi.os "linux" -}}
+install docker sudo sh -c "$(curl -fsSL https://get.docker.com)"
 install zsh sudo apt install zsh -y
 chsh -s $(which zsh)
 {{ end -}}
