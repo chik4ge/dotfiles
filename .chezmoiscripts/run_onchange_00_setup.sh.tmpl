@@ -7,12 +7,12 @@ function install() {
     if command -v $cmd &>/dev/null; then
         echo "$cmd is already installed"
     else
-        echo "Installing $1"
+        echo "Installing $cmd"
         shift
         "$@"
 
-        # check if cmd is installed
-        if command -v $cmd &>/dev/null; then
+        # check the exit code of the previous command
+        if [ $? -eq 0 ]; then
             echo "$cmd is installed"
         else
             echo "installing $cmd failed"
