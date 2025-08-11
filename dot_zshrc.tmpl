@@ -41,15 +41,13 @@ zsh-defer source ~/.config/zsh/lazy.zsh
 # unbind source override
 zsh-defer unfunction source
 
-# Start the tmux session if not already in the tmux session
-if [[ ! -n $TMUX && $TERM_PROGRAM != "vscode" ]]; then
-  SESSION_NAME="WSL"
-  tmux has-session -t $SESSION_NAME 2>/dev/null
-
-  if [ $? -eq 0 ]; then
-    tmux attach-session -t $SESSION_NAME
+# Start tmux only for interactive shells with TTY
+if [[ $- == *i* ]] && [[ -t 0 ]] && command -v tmux >/dev/null 2>&1 && [[ ! -n $TMUX && $TERM_PROGRAM != "vscode" ]]; then
+  SESSION_NAME="${TMUX_SESSION_NAME:-WSL}"
+  
+  if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+    exec tmux attach-session -t "$SESSION_NAME"
   else
-    tmux new-session -s $SESSION_NAME -n main -d
-    tmux attach-session -t $SESSION_NAME
+    exec tmux new-session -s "$SESSION_NAME" -n main
   fi
 fi
