@@ -1,0 +1,47 @@
+# Allow read-only kubectl commands to run outside the sandbox.
+prefix_rule(
+    pattern = ["kubectl", ["get", "describe", "logs", "top", "explain", "api-resources", "api-versions", "cluster-info", "version"]],
+    decision = "allow",
+    match = [
+      "kubectl get pods",
+      "kubectl describe pod nginx",
+      "kubectl logs deploy/web",
+      "kubectl top nodes",
+      "kubectl explain deployment",
+      "kubectl api-resources",
+      "kubectl api-versions",
+      "kubectl cluster-info",
+      "kubectl version",
+    ],
+    not_match = [
+      "kubectl apply -f k8s.yaml",
+      "kubectl delete pod nginx",
+      "kubectl patch deployment web -p '{}'",
+    ],
+)
+
+prefix_rule(
+    pattern = ["kubectl", "config", ["view", "get-contexts", "current-context"]],
+    decision = "allow",
+    match = [
+      "kubectl config view",
+      "kubectl config get-contexts",
+      "kubectl config current-context",
+    ],
+    not_match = [
+      "kubectl config set-context dev",
+      "kubectl config delete-context dev",
+    ],
+)
+
+prefix_rule(
+    pattern = ["kubectl", "auth", "can-i"],
+    decision = "allow",
+    match = [
+      "kubectl auth can-i get pods",
+      "kubectl auth can-i '*' '*' --all-namespaces",
+    ],
+    not_match = [
+      "kubectl auth reconcile -f rbac.yaml",
+    ],
+)

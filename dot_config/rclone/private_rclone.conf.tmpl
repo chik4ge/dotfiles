@@ -1,0 +1,26 @@
+[garage]
+type = s3
+provider = Other
+env_auth = false
+access_key_id = {{ onepasswordRead "op://homelab/garage-truenas-user/access-key-id" }}
+secret_access_key = {{ onepasswordRead "op://homelab/garage-truenas-user/secret-access-key" }}
+region = garage-truenas
+endpoint = http://192.168.0.200:30188
+
+[minio]
+type = s3
+provider = Minio
+env_auth = false
+access_key_id = {{ onepasswordRead "op://homelab/minio-user/access-key-id" }}
+secret_access_key = {{ onepasswordRead "op://homelab/minio-user/secret-access-key" }}
+region = us-east-1
+endpoint = https://minio.chik4ge.me
+
+[rgw]
+type = s3
+provider = Ceph
+env_auth = false
+access_key_id = {{ onepasswordRead "op://homelab/rgw-admin/access-key-id" }}
+secret_access_key = {{ onepasswordRead "op://homelab/rgw-admin/secret-access-key" }}
+region = us-east-1
+endpoint = https://rgw.chik4ge.me

@@ -24,6 +24,8 @@ apply = ["source"]
 hooks.post = '''
 zsh-defer autoload -Uz compinit
 zsh-defer compinit
+zsh-defer autoload bashcompinit
+zsh-defer bashcompinit
 '''
 
 [plugins.powerlevel10k]
@@ -33,6 +35,10 @@ hooks.post = "source ~/.config/zsh/p10k.zsh"
 
 [plugins.on-demand-completion]
 local = "~/.config/zsh/plugins/on-demand-completion"
+apply = ["source"]
+
+[plugins.pyrunbox]
+local = "~/.config/zsh/plugins/pyrunbox"
 apply = ["source"]
 
 # lazy
@@ -45,3 +51,27 @@ github = "zsh-users/zsh-autosuggestions"
 
 [plugins.docker-completion]
 inline = "zsh-defer on_demand_completion 'docker'"
+
+[plugins.mise-completion]
+inline = "zsh-defer on_demand_completion 'mise'"
+
+[plugins.talhelper-completion]
+inline = "zsh-defer on_demand_completion 'talhelper'"
+
+[plugins.gh-completion]
+inline = "zsh-defer on_demand_completion 'gh' 'gh completion -s zsh'"
+
+[plugins.op-completion]
+inline = "zsh-defer on_demand_completion 'op'"
+
+[plugins.kubectl-completion]
+inline = "zsh-defer on_demand_completion 'kubectl'"
+
+[plugins.talosctl-completion]
+inline = "zsh-defer on_demand_completion 'talosctl'"
+
+[plugins.aws-completion]
+inline = "zsh-defer on_demand_completion 'aws' 'complete -C aws_completer aws' false"
+
+[plugins.argocd-completion]
+inline = "zsh-defer on_demand_completion 'argocd' 'argocd completion zsh'"

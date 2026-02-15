@@ -1,41 +1,17 @@
 packages:
-  taps:
-    - name: "sdkman/tap"
-    - name: "siderolabs/tap"
-    - name: "hashicorp/tap"
+  taps: []
   brews:
     common:
-      - "argocd"
-      - "bat"
       - "chezmoi"
-      - "fzf"
-      - "gh"
-      - "k9s"
-      - "kubernetes-cli"
-      - "kustomize"
-      - "lazydocker"
-      - "lazygit"
-      - "luajit"
-      - "mysql-client"
-      - "neovim"
-      - "nvm"
-      - "plenv"
-      - "ripgrep"
+      - "mise"
       - "s3cmd"
-      - "sdkman/tap/sdkman-cli"
       - "sheldon"
       - "tmux"
       - "tree"
-      - "uv"
     darwin:
       - "coreutils"
     linux:
-      - "age"
       - "bitwarden-cli"
-      - "hashicorp/tap/terraform"
-      - "siderolabs/tap/talosctl"
-      - "sops"
-      - "talhelper"
   casks:
     common: []
     darwin: []

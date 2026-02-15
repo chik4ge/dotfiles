@@ -1,0 +1,109 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "small_model": "github-copilot/gpt-5-mini",
+  "permission": {
+    "bash": {
+      "*": "ask",
+      // basic read-only
+      "rg*": "allow",
+      "grep*": "allow",
+      "ls*": "allow",
+      "find*": "allow",
+      "tree*": "allow",
+      "curl*": "allow",
+      "ping*": "allow",
+      "jq*": "allow",
+      "echo*": "allow",
+      "head*": "allow",
+      "tail*": "allow",
+      "sort*": "allow",
+      "uniq*": "allow",
+      "wc*": "allow",
+      // prefer sandboxed Python execution
+      "python*": "deny",
+      "python3*": "deny",
+      "pip*": "deny",
+      "pip3*": "deny",
+      "pyrunbox*": "allow",
+      "pyrunbox*--mount-rw*": "ask",
+      // kubectl read-only
+      "kubectl get*": "allow",
+      "kubectl describe*": "allow",
+      "kubectl logs*": "allow",
+      "kubectl top*": "allow",
+      "kubectl config view*": "allow",
+      "kubectl rollout status*": "allow",
+      // talosctl read-only
+      "talosctl --help*": "allow",
+      "talosctl -h*": "allow",
+      "talosctl help*": "allow",
+      "talosctl cgroups*": "allow",
+      "talosctl containers*": "allow",
+      "talosctl -n * get*": "allow",
+      "talosctl --nodes * get*": "allow",
+      "talosctl get*": "allow",
+      "talosctl list*": "allow",
+      "talosctl read*": "allow",
+      "talosctl logs*": "allow",
+      "talosctl dmesg*": "allow",
+      "talosctl events*": "allow",
+      "talosctl inspect*": "allow",
+      "talosctl processes*": "allow",
+      "talosctl memory*": "allow",
+      "talosctl mounts*": "allow",
+      "talosctl netstat*": "allow",
+      "talosctl stats*": "allow",
+      "talosctl health*": "allow",
+      "talosctl time*": "allow",
+      "talosctl usage*": "allow",
+      "talosctl version*": "allow",
+      // git read-only
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git add*": "allow",
+      "git rev-parse*": "allow",
+      // gh read-only
+      "gh pr view*": "allow",
+      "gh issue view*": "allow",
+      // helm read-only (no cluster impact)
+      "helm list*": "allow",
+      "helm status*": "allow",
+      "helm get*": "allow",
+      "helm history*": "allow",
+      "helm show*": "allow",
+      "helm template*": "allow",
+      "helm lint*": "allow",
+      "helm repo add*": "allow",
+      "helm repo update*": "allow",
+      "helm repo list*": "allow",
+      "helm search*": "allow",
+      "helm version*": "allow",
+      // argocd
+      "argocd app get*": "allow",
+      "argocd app list*": "allow",
+      "argocd app history*": "allow",
+      "argocd app diff*": "allow",
+      "argocd app manifests*": "allow",
+      "argocd version*": "allow",
+    },
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{{ onepasswordRead "op://private/context7-token/credential" }}"
+      }
+    },
+    "grafana": {
+      "type": "local",
+      "command": ["mcp-grafana"],
+      "environment": {
+        "GRAFANA_URL": "https://grafana.chik4ge.me",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{{ onepasswordRead "op://homelab/grafana-service-account/token" }}"
+      }
+    }
+  }
+}

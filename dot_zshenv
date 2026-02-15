@@ -1,0 +1,15 @@
+. "$HOME/.cargo/env"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+_bootstrap_sheldon_plugins() {
+  if command -v sheldon >/dev/null 2>&1; then
+    eval "$(sheldon --non-interactive source)"
+  fi
+}
+
+# Load all sheldon plugins for non-interactive command shells too.
+if [[ -n "${ZSH_EXECUTION_STRING:-}" ]]; then
+  _bootstrap_sheldon_plugins
+fi
+
+unfunction _bootstrap_sheldon_plugins

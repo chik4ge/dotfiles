@@ -1,0 +1,61 @@
+[tools]
+"npm:@charmland/crush" = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:@qwen-code/qwen-code" = "latest"
+"npm:ccusage" = "latest"
+"pipx:aider-chat" = "latest"
+"pipx:transformers" = { version = "latest", uvx_args = "--with torch,torchvision,tensorflow[and-cuda],transformers[serving] --python 3.9" }
+"pipx:vllm" = "latest"
+age = "latest"
+argocd = "latest"
+bat = "latest"
+bun = "latest"
+claude = "latest"
+cmake = "latest"
+fzf = "latest"
+gh = "latest"
+go = "latest"
+go-jsonnet = "latest"
+jb = "latest"
+k9s = "latest"
+krew = "latest"
+kubectl = "latest"
+kustomize = "latest"
+lazydocker = "latest"
+lazygit = "latest"
+luajit = "latest"
+mc = "latest"
+neovim = "latest"
+node = "latest"
+npm = "latest"
+ollama = "latest"
+ripgrep = "latest"
+rust = "latest"
+sops = "latest"
+talhelper = "latest"
+talosctl = "latest"
+terraform = "latest"
+uv = "latest"
+jq = "latest"
+helm = "3"
+"go:github.com/grafana/mcp-grafana/cmd/mcp-grafana" = "latest"
+op = "latest"
+yq = "latest"
+"pipx:ansible-core" = "2.18"
+"go:github.com/peak/s5cmd/v2" = "latest"
+aws = "latest"
+rclone = "latest"
+"github:anomalyco/opencode" = "latest"
+mimirtool = "latest"
+"pipx:mitmproxy" = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
+experimental = true
+
+[env]
+UV_TORCH_BACKEND = "auto"
+
+[settings.npm]
+bun = true
