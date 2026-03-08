@@ -1,6 +1,34 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "small_model": "github-copilot/gpt-5-mini",
+  "provider": {
+    "llama.cpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama-server (local)",
+      "options": {
+        "baseURL": "http://172.30.208.1:5001/v1",
+        "apiKey": "none"
+      },
+      "models": {
+        "Qwen3.5-35B-A3B": {
+          "name": "Qwen3.5-35B-A3B",
+          "id": "unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL",
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
+        },
+        "Qwen3.5-9B": {
+          "name": "Qwen3.5-9B",
+          "id": "unsloth/Qwen3.5-9B-GGUF",
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
+        }
+      }
+    }
+  },
   "permission": {
     "bash": {
       "*": "ask",
@@ -99,7 +127,7 @@
     },
     "grafana": {
       "type": "local",
-      "command": ["mcp-grafana"],
+      "command": ["mcp-grafana", "--disable-write"],
       "environment": {
         "GRAFANA_URL": "https://grafana.chik4ge.me",
         "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{{ onepasswordRead "op://homelab/grafana-service-account/token" }}"

@@ -1,34 +1,34 @@
-# model = "gpt-5-codex"
-# model_provider = "local"
+model = "unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL"
+model_provider = "local"
 
-model = "gpt-5.2-codex"
-model_reasoning_effort = "medium"
+# model = "gpt-5.2-codex"
+# model_reasoning_effort = "medium"
 
-approval_policy = "on-failure"
+approval_policy = "on-request"
 sandbox_mode = "workspace-write"
-personality = "pragmatic"
+# personality = "pragmatic"
 
 [sandbox_workspace_write]
 network_access = true
 
 [model_providers.local]
 name = "local"
-base_url = "http://localhost:8080/v1"
-disable_response_storage = true
+base_url = "http://172.30.208.1:5001/v1"
+# disable_response_storage = true
 show_raw_agent_reasoning = true
 
 [features]
-treamable_shell = true
-web_search_request = true
-unified_exec = true
+# treamable_shell = true
+# web_search_request = true
+# unified_exec = true
 
-[mcp_servers.kubernetes]
-command = "bunx"
-args = ["-y", "kubernetes-mcp-server@latest", "--read-only"]
+# [mcp_servers.kubernetes]
+# command = "bunx"
+# args = ["-y", "kubernetes-mcp-server@latest", "--read-only"]
 
 [mcp_servers.grafana]
 command = "mcp-grafana"
-"args" = []
+args = []
 env = { GRAFANA_URL = "https://grafana.chik4ge.me", GRAFANA_SERVICE_ACCOUNT_TOKEN = "{{ onepasswordRead "op://homelab/grafana-service-account/token" }}" }
 
 # [projects."/home/chikage/dev/k8s-homelab/homelab-applications"]

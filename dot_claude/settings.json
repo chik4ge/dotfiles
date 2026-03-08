@@ -7,7 +7,6 @@
             "TodoRead(**)",
             "TodoWrite(**)",
             "WebFetch",
-            "WebSearch(**)",
             "mcp__Kubernetes__kubectl_describe",
             "mcp__Kubernetes__kubectl_get",
             "mcp__Kubernetes__kubectl_list",
@@ -19,5 +18,11 @@
     "statusLine": {
         "type": "command",
         "command": "bun x ccusage statusline"
-    }
+    },
+    "env": {
+        "ANTHROPIC_BASE_URL": "http://172.30.208.1:5001",
+        "ANTHROPIC_MODEL": "unsloth/Qwen3.5-35B-A3B-GGUF:UD-Q4_K_XL",
+        "ANTHROPIC_API_KEY": "sk-no-key-required"
+    },
+    "apiKeyHelper": "echo hogehoge"
 }
